@@ -62,6 +62,7 @@ export const addStyle = (styleContainerNode: any, cmpMeta: d.ComponentRuntimeMet
             styleElm.setAttribute(HYDRATED_STYLE_ID, scopeId);
           }
 
+          (window as any).cspNonce && styleElm.setAttribute('nonce', (window as any).cspNonce);
           styleContainerNode.insertBefore(styleElm, styleContainerNode.querySelector('link'));
         }
 
