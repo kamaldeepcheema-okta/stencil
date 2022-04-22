@@ -48,7 +48,7 @@ export function jestSetupTestFramework() {
 
   global.screenshotDescriptions = new Set();
 
-  const env: d.E2EProcessEnv = process.env;
+  const env: NodeJS.ProcessEnv = process.env;
 
   if (typeof env.__STENCIL_DEFAULT_TIMEOUT__ === 'string') {
     const time = parseInt(env.__STENCIL_DEFAULT_TIMEOUT__, 10);

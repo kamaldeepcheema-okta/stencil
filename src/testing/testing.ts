@@ -4,7 +4,6 @@ import type {
   CompilerWatcher,
   Config,
   DevServer,
-  E2EProcessEnv,
   OutputTargetWww,
   Testing,
   TestingRunOptions,
@@ -29,7 +28,7 @@ export const createTesting = async (config: Config): Promise<Testing> => {
   const run = async (opts: TestingRunOptions = {}) => {
     let doScreenshots = false;
     let passed = false;
-    let env: E2EProcessEnv;
+    let env: any;
     let compilerWatcher: CompilerWatcher = null;
     const msg: string[] = [];
 

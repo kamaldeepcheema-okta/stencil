@@ -1,4 +1,4 @@
-import type { E2EProcessEnv, EmulateConfig, HostElement, JestEnvironmentGlobal } from '@stencil/core/internal';
+import type { EmulateConfig, HostElement, JestEnvironmentGlobal } from '@stencil/core/internal';
 import type {
   E2EPage,
   E2EPageInternal,
@@ -21,7 +21,7 @@ import { initPageScreenshot } from './puppeteer-screenshot';
 
 declare const global: JestEnvironmentGlobal;
 
-const env: E2EProcessEnv = process.env;
+const env: NodeJS.ProcessEnv = process.env;
 export async function newE2EPage(opts: NewE2EPageOptions = {}): Promise<E2EPage> {
   if (!global.__NEW_TEST_PAGE__) {
     throw new Error(`newE2EPage() is only available from E2E tests, and ran with the --e2e cmd line flag.`);
@@ -111,7 +111,7 @@ export async function newE2EPage(opts: NewE2EPageOptions = {}): Promise<E2EPage>
         throw new Error('Set the --devtools flag in order to use E2EPage.debugger()');
       }
       return page.evaluate(() => {
-        return new Promise(resolve => {
+        return new Promise<void>(resolve => {
           // tslint:disable-next-line: no-debugger
           debugger;
           resolve();
@@ -314,7 +314,7 @@ async function waitForChanges(page: E2EPageInternal) {
 
     await page.evaluate(() => {
       // BROWSER CONTEXT
-      return new Promise(resolve => {
+      return new Promise<void>(resolve => {
         requestAnimationFrame(() => {
           const promises: Promise<any>[] = [];
 
